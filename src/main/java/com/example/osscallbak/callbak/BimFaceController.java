@@ -36,13 +36,12 @@ public class BimFaceController {
         return bimfaceClient.getViewTokenByFileId(fileId);
     }
 
-    @PostMapping("/upFile")
+    @RequestMapping("/upFile")
     @ResponseBody
     @ApiOperation(value = "文件上传并自动转换")
-    public FileBean  upFile(@RequestParam("name") String name) throws BimfaceException, FileNotFoundException {
+    public FileBean  upFile() throws BimfaceException, FileNotFoundException {
 
         BimfaceClient bimfaceClient = new BimfaceClient(BimFaceConst.APP_KEY, BimFaceConst.APP_SECRET);
-            String na = name;
         File fi = null;
         InputStream inputStreams = null;
         MultipartFile multipartFile = null;
@@ -75,7 +74,7 @@ public class BimFaceController {
 //            FileBean fileBean = bimfaceClient.upload(fi.getName(), fi.length(), inputStreams);
         
         
-            FileBean fileBean = bimfaceClient.upload(fi.getName(), url);
+            FileBean fileBean = bimfaceClient.upload("阿里巴巴Java开发手册终极版v1.3.0.rvt", url);
             System.out.println("上传结束时间时间"+sim.format(new Date()));
             return fileBean;
 //            FileTranslateBean translate = bimfaceClient.translate(fileBean.getFileId());
